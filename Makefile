@@ -13,7 +13,7 @@ LIB_NAME	= $(LIB_DIR)libft.a
 
 INCS		= $(addprefix $(INCS_DIR), push_swap.h)
 
-SRCS_CH		=  $(addprefix sources/checker/, main.c)
+SRCS_CH		=  $(addprefix sources/checker/, main.c check.c)
 SRCS_PS		=  $(addprefix sources/push_swap/, main.c)
  
 OBJS_CH		= $(SRCS_CH:.c=.o)

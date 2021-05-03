@@ -1,38 +1,69 @@
 #include "push_swap.h"
 
-int	check_one(char *str)
+int	print_error(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] && (str[i] == '+' || str[i] == '-'))
-		i++;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (1);
-		i++;
-	}
+	ft_putstr_fd(str, 2);
 	return (0);
 }
 
-int	check_args(int argc, char **argv)
+void	fill_stack(t_stack *stack, char **argv)
 {
 	int	i;
 
 	i = 1;
-	while (i < argc)
+	while (i < stack->size)
 	{
-		if (check_one(argv[i]))
-			return (1);
+		stack->a[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
-	return (0);
+	stack->n_a = stack->size - 1;
+	stack->n_b = 0;
+}
+
+t_stack	*init_stack(int argc, char **argv)
+{
+	t_stack	*stack;
+
+	stack = malloc(sizeof(t_stack));
+	if (!stack)
+		return (NULL);
+	stack->a = malloc(argc * sizeof(int));
+	stack->b = malloc(argc * sizeof(int));
+	if (!stack->a || !stack->b)
+		return (NULL);
+	stack->size = argc;
+	fill_stack(stack, argv); 
+	return (stack);
+}
+
+void	print_stack(t_stack stack)
+{
+	int	i;
+
+	i = 0;
+	while (i < stack.n_a || i < stack.n_b)
+	{
+		if (i < stack.n_a && i < stack.n_b)
+			ft_printf("%3d %3d\n", stack.a[i], stack.b[i]);
+		else if (i < stack.n_a)
+			ft_printf("%3d    \n", stack.a[i]);
+		else
+			ft_printf("    %3d\n", stack.b[i]);
+		i++;
+	}
+	ft_putstr(" _   _ \n");
+	ft_putstr(" a   b \n");
 }
 
 int	main(int argc, char **argv)
 {
+	t_stack	*stack;
+
 	if (check_args(argc, argv))
-		ft_putstr("Error\n");
+		return (print_error("Error\n"));
+	stack = init_stack(argc, argv);
+	if (!stack)
+		return (print_error("Allocation issues\n"));
+	print_stack(*stack);
 	return (0);
 }
