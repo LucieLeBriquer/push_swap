@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/03 16:47:59 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:09:28 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	main(int argc, char **argv)
 		return (print_error("Allocation issues\n"));
 	print_stack(*stack);
 	execute_instructions(stack);
+	check_sorted(*stack);
 	free_all(stack);
 	return (0);
 }

@@ -60,3 +60,25 @@ int	is_instruction(char *str)
 		return (RRR);
 	return (-1);
 }
+
+void	check_sorted(t_stack stack)
+{
+	int	i;
+
+	if (stack.n_b != 0)
+	{
+		ft_putstr("KO!\n");
+		return ;
+	}
+	i = 0;
+	while (i < stack.n_a - 1)
+	{
+		if (stack.a[i] > stack.a[i + 1])
+		{
+			ft_putstr("KO!\n");
+			return ;
+		}
+		i++;
+	}
+	ft_putstr("OK!\n");
+}
