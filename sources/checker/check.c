@@ -82,3 +82,23 @@ void	check_sorted(t_stack stack)
 	}
 	ft_putstr("OK!\n");
 }
+
+int		duplicate(t_stack stack)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < stack.n_a)
+	{
+		j = 0;
+		while (j < i)
+		{
+			if (stack.a[i] == stack.a[j])
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}

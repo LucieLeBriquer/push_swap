@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/03 17:09:28 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:15:49 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	main(int argc, char **argv)
 	stack = init_stack(argc, argv);
 	if (!stack)
 		return (print_error("Allocation issues\n"));
+	if (duplicate(*stack))
+		return (print_error("Error\n"));
 	print_stack(*stack);
 	execute_instructions(stack);
 	check_sorted(*stack);

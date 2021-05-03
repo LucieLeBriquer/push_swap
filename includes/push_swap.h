@@ -18,6 +18,7 @@ int		execute_instructions(t_stack *stack);
 int		is_instruction(char *str);
 void	print_stack(t_stack stack);
 void	check_sorted(t_stack stack);
+int		duplicate(t_stack stack);
 
 void	execute_sa(t_stack *stack);
 void	execute_sb(t_stack *stack);
