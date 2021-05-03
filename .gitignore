@@ -1,4 +1,6 @@
-checker
-push_swap
-*.swp
 *.o
+*.swp
+checker
+!sources/checker/
+push_swap
+!sources/push_swap/
