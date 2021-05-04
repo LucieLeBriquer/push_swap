@@ -1,3 +1,6 @@
+# push_swap
+
+## Barême
 - Pour 3 values = entre 2 / 3 opérations
 - Pour 5 values = max 12
 - Pour 100 values = barème de 1 à 5
@@ -12,3 +15,6 @@
   - moins de 8500: 3
   - moins de 10000: 2
   - moins de 11500: 1
+
+  ## TODO
+  - arguments dans des strings
