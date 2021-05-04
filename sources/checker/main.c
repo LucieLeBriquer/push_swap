@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/03 17:15:49 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/05/04 17:30:55 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,21 @@ void	print_stack(t_stack stack)
 	int	i;
 
 	i = 0;
-	ft_putstr("-------\n");
+	ft_putstr("-----------------------\n");
 	while (i < stack.n_a || i < stack.n_b)
 	{
 		if (i < stack.n_a && i < stack.n_b)
-			ft_printf("%3d %3d\n", stack.a[i], stack.b[i]);
+			ft_printf("%11d %11d\n", stack.a[i], stack.b[i]);
 		else if (i < stack.n_a)
-			ft_printf("%3d    \n", stack.a[i]);
+			ft_printf("%11d\n", stack.a[i]);
 		else
-			ft_printf("    %3d\n", stack.b[i]);
+			ft_printf("%s%11d\n", "            ", stack.b[i]);
 		i++;
 	}
-	ft_putstr(" _   _ \n");
-	ft_putstr(" a   b \n");
-	ft_printf("[%d] [%d]\n", stack.n_a, stack.n_b);
-	ft_putstr("-------\n\n");
+	ft_putstr("___________ ");
+	ft_putstr("___________\n");
+	ft_putstr("     a           b\n");
+	ft_putstr("-----------------------\n\n");
 }
 
 
