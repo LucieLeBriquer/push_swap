@@ -1,7 +1,11 @@
 #include "push_swap.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	ft_putstr("Not implemented\n");
+	if (argc == 1)
+		return (0);
+	if (check_args(argc, argv))
+		//return (print_error("Error\n"));
+		return (0);
 	return (0);
 }
