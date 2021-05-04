@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/04 23:12:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/05/04 23:18:13 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_stack	*init_stack(int argc, char **argv)
 		return (NULL);
 	}
 	stack->size = argc;
-	fill_stack(stack, argv); 
+	fill_stack(stack, argv);
 	return (stack);
 }
 

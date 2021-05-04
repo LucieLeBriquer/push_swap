@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:46:14 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 20:36:05 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/05/04 23:26:31 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_ptoa(unsigned long ptr, int size)
 	return (res);
 }
 
-int		size_ptr(unsigned long ptr, int prec)
+int	size_ptr(unsigned long ptr, int prec)
 {
 	int		i;
 
@@ -49,7 +49,7 @@ int		size_ptr(unsigned long ptr, int prec)
 	return (ft_max(i, prec) + 2);
 }
 
-int		min_not_neg(int a, int b)
+int	min_not_neg(int a, int b)
 {
 	if (a == -1)
 		return (b);

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 00:08:59 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 21:04:40 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/05/04 23:29:35 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
 #  define BUFFER_SIZE 4095
 # endif
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
 
-typedef struct		s_buffer
+typedef struct s_buffer
 {
 	int				size;
 	char			content[BUFFER_SIZE + 1];
 }					t_buffer;
 
-typedef struct		s_print
+typedef struct s_print
 {
 	int				align;
 	int				zero;
