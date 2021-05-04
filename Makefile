@@ -13,9 +13,21 @@ LIB_NAME	= $(LIB_DIR)libft.a
 
 INCS		= $(addprefix $(INCS_DIR), push_swap.h)
 
-SRCS		=  $(addprefix sources/utils/, check.c print.c)
-SRCS_CH		=  $(addprefix sources/checker/, main.c execute.c operations.c useful.c)
-SRCS_PS		=  $(addprefix sources/push_swap/, main.c)
+SRCS		=  $(addprefix sources/utils/, \
+				check.c \
+				print.c)
+
+SRCS_CH		=  $(addprefix sources/checker/, \
+				main.c \
+				execute.c \
+				op_push.c \
+				op_reverse.c \
+				op_rotate.c \
+				op_swap.c \
+				useful.c)
+
+SRCS_PS		=  $(addprefix sources/push_swap/, \
+				main.c)
  
 OBJS		= $(SRCS:.c=.o)
 OBJS_CH		= $(SRCS_CH:.c=.o)

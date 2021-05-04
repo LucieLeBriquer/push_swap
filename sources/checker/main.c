@@ -6,13 +6,13 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/04 18:01:26 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/05/04 23:12:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_all(t_stack *stack)
+static void	free_all(t_stack *stack)
 {
 	if (stack->a)
 		free(stack->a);
