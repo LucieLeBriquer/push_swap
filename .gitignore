@@ -1,4 +1,5 @@
 *.o
+*.pdf
 *.swp
 checker
 !sources/checker/
