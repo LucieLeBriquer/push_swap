@@ -15,7 +15,8 @@ INCS		= $(addprefix $(INCS_DIR), push_swap.h)
 
 SRCS		=  $(addprefix sources/utils/, \
 				check.c \
-				print.c)
+				print.c \
+				stack.c)
 
 SRCS_CH		=  $(addprefix sources/checker/, \
 				main.c \

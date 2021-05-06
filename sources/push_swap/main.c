@@ -6,49 +6,29 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 18:00:11 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/04 18:04:47 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:44:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	fill_numbers(int *numbers, int argc, char **argv)
+void	generate_code(t_stack *stack)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	while (i < argc)
-	{
-		j = 0;
-		numbers[i - 1] = ft_atoi(argv[i]);
-		while (j < i - 1)
-		{
-			if (numbers[i - 1] == numbers[j])
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
+	(void)stack;
 }
 
 int	main(int argc, char **argv)
 {
-	int		*numbers;
+	t_stack	*stack;
 
 	if (argc == 1)
 		return (0);
 	if (check_args(argc, argv))
 		return (print_error("Error\n"));
-	numbers = malloc(argc * sizeof(int));
-	if (!numbers)
-		return (print_error("Allocation issues\n"));
-	if (fill_numbers(numbers, argc, argv))
-	{
-		free(numbers);
+	stack = init_stack(argc, argv);
+	if (!stack)
 		return (print_error("Error\n"));
-	}
-	free(numbers);
+	generate_code(stack);
+	free_all(stack);
 	return (0);
 }
