@@ -17,4 +17,5 @@
   - moins de 11500: 1
 
   ## TODO
-  - arguments dans des strings
+- arguments dans des strings
+- go faire un isomorphisme de [min, max] vers [0, max - min + 1]

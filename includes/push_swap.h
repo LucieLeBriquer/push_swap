@@ -22,6 +22,7 @@ typedef struct s_stack
 {
 	int	*a;
 	int	*b;
+	int	*iso;
 	int	size;
 	int	n_b;
 	int	n_a;

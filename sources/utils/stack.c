@@ -18,6 +18,8 @@ void	free_all(t_stack *stack)
 		free(stack->a);
 	if (stack->b)
 		free(stack->b);
+	if (stack->iso)
+		free(stack->iso);
 	if (stack)
 		free(stack);
 }
@@ -54,7 +56,8 @@ t_stack	*init_stack(int argc, char **argv)
 		return (NULL);
 	stack->a = malloc(argc * sizeof(int));
 	stack->b = malloc(argc * sizeof(int));
-	if (!stack->a || !stack->b)
+	stack->iso = malloc(argc * sizeof(int));
+	if (!stack->a || !stack->b || !stack->iso)
 	{
 		free_all(stack);
 		return (NULL);
