@@ -61,6 +61,10 @@ t_stack	*init_stack(int argc, char **argv)
 		return (NULL);
 	}
 	stack->size = argc - 1;
+	stack->chunk[0] = stack->size / 2;
+	stack->chunk[1] = stack->size / 4;
+	stack->chunk[2] = stack->size / 8;
+	stack->chunk[3] = stack->size / 16;
 	if (fill_stack(stack, argv))
 	{
 		free_all(stack);

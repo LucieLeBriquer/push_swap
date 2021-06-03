@@ -17,17 +17,16 @@
   - moins de 11500: 1
 
 ## TODO
-- arguments dans des strings
-- go faire un isomorphisme de [min, max] vers [0, max - min + 1]
+[..] arguments dans des strings
+[OK] go faire un isomorphisme de [min, max] vers [0, max - min + 1]
 
 ## Notes
-step1:
-- push sur la stackB les elements <= max / 2 E\E1
-- repush sur la stackA les elements >= max / 4 E2
-- repush sur la stackA les elements >= max / 8 E3
-- repush sur la stackA les elements >= max / 16 E4
-- repush le reste
-- trier E4 en s'aidant de la stackB (du style moit-moit sur les deux stack)
-- trier E3 same way
-- trier E2 same way
-- trier E1 same way
+[OK] push sur la stackB les elements <= max / 2 E\E1
+[..] repush sur la stackA les elements >= max / 4 E2
+[..] repush sur la stackA les elements >= max / 8 E3
+[..] repush sur la stackA les elements >= max / 16 E4
+[..] repush le reste
+[..] trier E4 en s'aidant de la stackB (du style moit-moit sur les deux stack)
+[..] trier E3 same way
+[..] trier E2 same way
+[..] trier E1 same way

@@ -17,13 +17,12 @@ void	push_first_chunk(t_stack *stack)
 	int	i;
 
 	i = -1;
-	while (++i < stack->size)
+	while (++i < stack->size && stack->n_b < stack->chunk[0])
 	{
-		if (stack->a[0] < stack->size / 2)
+		if (stack->a[0] < stack->chunk[0])
 		{
 			ft_putstr("pb\n");
 			execute_pb(stack);
-			ft_printf("%d %d\n", stack->n_a, stack->n_b);
 		}
 		else
 		{
@@ -34,9 +33,75 @@ void	push_first_chunk(t_stack *stack)
 	print_stack(*stack);
 }
 
+void	push_second_chunk(t_stack *stack)
+{
+	int	i;
+
+	i = -1;
+	while (++i < stack->n_b && stack->n_b >= stack->chunk[1])
+	{
+		if (stack->b[0] >= stack->chunk[1])
+		{
+			ft_putstr("pa\n");
+			execute_pa(stack);
+		}
+		else
+		{
+			ft_putstr("rb\n");
+			execute_rb(stack);
+		}
+	}
+	print_stack(*stack);
+}
+
+void	push_third_chunk(t_stack *stack)
+{
+	int	i;
+
+	i = -1;
+	while (++i < stack->n_b && stack->n_b >= stack->chunk[2])
+	{
+		if (stack->b[0] >= stack->chunk[2])
+		{
+			ft_putstr("pa\n");
+			execute_pa(stack);
+		}
+		else
+		{
+			ft_putstr("rb\n");
+			execute_rb(stack);
+		}
+	}
+	print_stack(*stack);
+}
+
+void	push_fourth_chunk(t_stack *stack)
+{
+	int	i;
+
+	i = -1;
+	while (++i < stack->n_b && stack->n_b >= stack->chunk[3])
+	{
+		if (stack->b[0] >= stack->chunk[3])
+		{
+			ft_putstr("pa\n");
+			execute_pa(stack);
+		}
+		else
+		{
+			ft_putstr("rb\n");
+			execute_rb(stack);
+		}
+	}
+	print_stack(*stack);
+}
+
 void	generate_code(t_stack *stack)
 {
 	push_first_chunk(stack);
+	push_second_chunk(stack);
+	push_third_chunk(stack);
+	push_fourth_chunk(stack);
 }
 
 int	main(int argc, char **argv)
@@ -51,6 +116,7 @@ int	main(int argc, char **argv)
 	if (!stack)
 		return (print_error("Error\n"));
 	isomorphism(stack);
+	print_stack(*stack);
 	generate_code(stack);
 	free_all(stack);
 	return (0);
