@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	stack = init_stack(argc, argv);
 	if (!stack)
 		return (print_error("Error\n"));
-	print_stack(*stack);
 	execute_instructions(stack);
 	check_sorted(*stack);
 	free_all(stack);

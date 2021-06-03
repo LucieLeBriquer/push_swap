@@ -45,6 +45,17 @@ static int	fill_stack(t_stack *stack, char **argv)
 	return (0);
 }
 
+static void	fill_chunks(t_stack *stack)
+{
+	int	i;
+
+	stack->chunk[0] = stack->size / stack->nb_chunk;
+	i = 0;
+	while (++i < stack->nb_chunk - 1)
+		stack->chunk[i] = stack->chunk[0] * i;
+	stack->chunk[stack->nb_chunk - 1] = stack->size;
+}
+
 t_stack	*init_stack(int argc, char **argv)
 {
 	t_stack	*stack;
@@ -55,16 +66,22 @@ t_stack	*init_stack(int argc, char **argv)
 	stack->a = malloc((argc - 1) * sizeof(int));
 	stack->b = malloc((argc - 1) * sizeof(int));
 	stack->copy = malloc((argc - 1) * sizeof(int));
-	if (!stack->a || !stack->b || !stack->copy)
+	stack->size = argc - 1;
+	if (stack->size >= 500)
+		stack->nb_chunk = 12;
+	else if (stack->size > 5)
+		stack->nb_chunk = 5;
+	else if (stack->size > 3)
+		stack->nb_chunk = 2;
+	else
+		stack->nb_chunk = 1;
+	stack->chunk = malloc(stack->nb_chunk * sizeof(int));
+	if (!stack->a || !stack->b || !stack->copy || !stack->chunk)
 	{
 		free_all(stack);
 		return (NULL);
 	}
-	stack->size = argc - 1;
-	stack->chunk[0] = stack->size / 2;
-	stack->chunk[1] = stack->size / 4;
-	stack->chunk[2] = stack->size / 8;
-	stack->chunk[3] = stack->size / 16;
+	fill_chunks(stack);
 	if (fill_stack(stack, argv))
 	{
 		free_all(stack);

@@ -18,7 +18,6 @@ void	execute_sa(t_stack *stack)
 
 	if (stack->n_a <= 1)
 		return ;
-	ft_printf("%d\n", stack->n_a);
 	swap = stack->a[0];
 	stack->a[0] = stack->a[1];
 	stack->a[1] = swap;

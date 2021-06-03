@@ -28,7 +28,8 @@ typedef struct s_stack
 	int	size;
 	int	n_b;
 	int	n_a;
-	int	chunk[4];
+	int	*chunk;
+	int	nb_chunk;
 }		t_stack;
 
 typedef void	(*t_ope)(t_stack *stack);

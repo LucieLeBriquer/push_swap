@@ -18,32 +18,6 @@ int	print_error(char *str)
 	return (0);
 }
 
-int	which_chunk(t_stack stack, int i)
-{
-	if (i >= stack.chunk[0])
-		return (-1);
-	if (i < stack.chunk[3])
-		return (3);
-	if (i < stack.chunk[2])
-		return (2);
-	if (i < stack.chunk[1])
-		return (1);
-	return (0);
-}
-
-char	*chunk_color(t_stack stack, int i)
-{
-	if (which_chunk(stack, i) == 1)
-		return ("\033[31m");
-	if (which_chunk(stack, i) == 2)
-		return ("\033[32m");
-	if (which_chunk(stack, i) == 3)
-		return ("\033[33m");
-	if (which_chunk(stack, i) == 0)
-		return ("\033[34m");
-	return ("\033[0m");
-}
-
 void	print_stack(t_stack stack)
 {
 	int	i;
@@ -53,11 +27,11 @@ void	print_stack(t_stack stack)
 	while (i < stack.n_a || i < stack.n_b)
 	{
 		if (i < stack.n_a && i < stack.n_b)
-			ft_printf("%s%11d %s%11d\n", chunk_color(stack, stack.a[i]), stack.a[i], chunk_color(stack, stack.b[i]), stack.b[i]);
+			ft_printf("%11d %11d\n", stack.a[i], stack.b[i]);
 		else if (i < stack.n_a)
-			ft_printf("%s%11d\n",  chunk_color(stack, stack.a[i]), stack.a[i]);
+			ft_printf("%11d\n", stack.a[i]);
 		else
-			ft_printf("%s%s%11d\n", "            ", chunk_color(stack, stack.b[i]), stack.b[i]);
+			ft_printf("%s%11d\n", "            ", stack.b[i]);
 		i++;
 	}
 	ft_putstr("\033[0m___________ ");

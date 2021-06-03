@@ -40,10 +40,7 @@ int	execute_instructions(t_stack *stack)
 	{
 		op = is_instruction(line);
 		if (op >= 0)
-		{
 			execute_ope(op, stack);
-			print_stack(*stack);
-		}
 	}
 	return (0);
 }
