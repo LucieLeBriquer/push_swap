@@ -16,19 +16,20 @@ INCS		= $(addprefix $(INCS_DIR), push_swap.h)
 SRCS		=  $(addprefix sources/utils/, \
 				check.c \
 				print.c \
+				op_push.c \
+				op_reverse.c \
+				op_rotate.c \
+				op_swap.c \
 				stack.c)
 
 SRCS_CH		=  $(addprefix sources/checker/, \
 				main.c \
 				execute.c \
-				op_push.c \
-				op_reverse.c \
-				op_rotate.c \
-				op_swap.c \
 				useful.c)
 
 SRCS_PS		=  $(addprefix sources/push_swap/, \
-				main.c)
+				main.c \
+				isomorphism.c)
  
 OBJS		= $(SRCS:.c=.o)
 OBJS_CH		= $(SRCS_CH:.c=.o)

@@ -48,4 +48,5 @@ void	execute_pb(t_stack *stack)
 	stack->n_b++;
 	stack->n_a--;
 	stack->b[0] = push;
+	ft_printf("%d %d\n", stack->n_a, stack->n_b);
 }

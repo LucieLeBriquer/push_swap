@@ -29,20 +29,18 @@ static int	fill_stack(t_stack *stack, char **argv)
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < stack->size)
+	i = -1;
+	while (++i < stack->size)
 	{
-		stack->a[i - 1] = ft_atoi(argv[i]);
-		j = 0;
-		while (j < i - 1) 
+		stack->a[i] = ft_atoi(argv[i + 1]);
+		j = -1;
+		while (++j < i - 1) 
 		{
-			if (stack->a[i - 1] == stack->a[j])
+			if (stack->a[i] == stack->a[j])
 				return (1);
-			j++;
 		}
-		i++;
 	}
-	stack->n_a = stack->size - 1;
+	stack->n_a = stack->size;
 	stack->n_b = 0;
 	return (0);
 }
@@ -54,15 +52,15 @@ t_stack	*init_stack(int argc, char **argv)
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
-	stack->a = malloc(argc * sizeof(int));
-	stack->b = malloc(argc * sizeof(int));
-	stack->iso = malloc(argc * sizeof(int));
-	if (!stack->a || !stack->b || !stack->iso)
+	stack->a = malloc((argc - 1) * sizeof(int));
+	stack->b = malloc((argc - 1) * sizeof(int));
+	stack->copy = malloc((argc - 1) * sizeof(int));
+	if (!stack->a || !stack->b || !stack->copy)
 	{
 		free_all(stack);
 		return (NULL);
 	}
-	stack->size = argc;
+	stack->size = argc - 1;
 	if (fill_stack(stack, argv))
 	{
 		free_all(stack);
