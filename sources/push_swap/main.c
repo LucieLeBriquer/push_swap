@@ -36,9 +36,11 @@ void	push_first_chunk(t_stack *stack)
 void	push_second_chunk(t_stack *stack)
 {
 	int	i;
+	int	max;
 
 	i = -1;
-	while (++i < stack->n_b && stack->n_b >= stack->chunk[1])
+	max = stack->n_b;
+	while (++i < max && stack->n_b >= stack->chunk[1])
 	{
 		if (stack->b[0] >= stack->chunk[1])
 		{
@@ -57,9 +59,11 @@ void	push_second_chunk(t_stack *stack)
 void	push_third_chunk(t_stack *stack)
 {
 	int	i;
+	int	max;
 
 	i = -1;
-	while (++i < stack->n_b && stack->n_b >= stack->chunk[2])
+	max = stack->n_b;
+	while (++i < max && stack->n_b >= stack->chunk[2])
 	{
 		if (stack->b[0] >= stack->chunk[2])
 		{
@@ -78,9 +82,11 @@ void	push_third_chunk(t_stack *stack)
 void	push_fourth_chunk(t_stack *stack)
 {
 	int	i;
+	int	max;
 
 	i = -1;
-	while (++i < stack->n_b && stack->n_b >= stack->chunk[3])
+	max = stack->n_b;
+	while (++i < max && stack->n_b >= stack->chunk[3])
 	{
 		if (stack->b[0] >= stack->chunk[3])
 		{
@@ -96,12 +102,23 @@ void	push_fourth_chunk(t_stack *stack)
 	print_stack(*stack);
 }
 
+void	push_rest(t_stack *stack)
+{
+	while (stack->n_b != 0)
+	{
+		ft_putstr("pa\n");
+		execute_pa(stack);
+	}
+	print_stack(*stack);
+}
+
 void	generate_code(t_stack *stack)
 {
 	push_first_chunk(stack);
 	push_second_chunk(stack);
 	push_third_chunk(stack);
 	push_fourth_chunk(stack);
+	push_rest(stack);
 }
 
 int	main(int argc, char **argv)
