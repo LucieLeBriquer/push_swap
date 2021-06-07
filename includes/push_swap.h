@@ -56,6 +56,11 @@ void	free_all(t_stack *stack);
 */
 
 void    isomorphism(t_stack *stack);
+void	rev_move_to_top(t_stack *stack, int pos);
+void	rev_insert_sort(t_stack *stack);
+void	insert_sort(t_stack *stack);
+void	generate_size5(t_stack *stack);
+void	generate_size3(t_stack *stack);
 
 /*
 ** basic operations
@@ -72,5 +77,14 @@ void	execute_rr(t_stack *stack);
 void	execute_rra(t_stack *stack);
 void	execute_rrb(t_stack *stack);
 void	execute_rrr(t_stack *stack);
+
+/*
+** multiple operations
+*/
+
+void	multiple_ra(t_stack *stack, int i);
+void	multiple_rra(t_stack *stack, int i);
+void	multiple_rb(t_stack *stack, int i);
+void	multiple_rrb(t_stack *stack, int i);
 
 #endif

@@ -4,60 +4,29 @@ RM			= rm -rf
 CHECK		= checker 
 PUSH		= push_swap
 
-INCS_DIR	= ./includes/
-MAIN_INC	= -I$(INCS_DIR)
+CH_DIR		= sources/checker/
+PS_DIR		= sources/push_swap/
 
-LIB_DIR		= ./libft/
-LIB_INC		= -I$(LIB_DIR)includes/
-LIB_NAME	= $(LIB_DIR)libft.a
+all			: $(PUSH)
 
-INCS		= $(addprefix $(INCS_DIR), push_swap.h)
+bonus		: $(CHECK)
 
-SRCS		=  $(addprefix sources/utils/, \
-				check.c \
-				print.c \
-				op_push.c \
-				op_reverse.c \
-				op_rotate.c \
-				op_swap.c \
-				stack.c)
+$(PUSH)		:
+			@make --silent -C $(PS_DIR)
 
-SRCS_CH		=  $(addprefix sources/checker/, \
-				main.c \
-				execute.c \
-				useful.c)
+$(CHECK)	: $(PUSH)
+			@make --silent -C $(CH_DIR)
 
-SRCS_PS		=  $(addprefix sources/push_swap/, \
-				main.c \
-				isomorphism.c)
- 
-OBJS		= $(SRCS:.c=.o)
-OBJS_CH		= $(SRCS_CH:.c=.o)
-OBJS_PS		= $(SRCS_PS:.c=.o)
+clean		:
+			@$(MAKE) clean --silent -C $(PS_DIR)
+			@$(MAKE) clean --silent -C $(CH_DIR)
 
-%.o			: %.c
-			@$(CC) $(MAIN_INC) $(LIB_INC) -c $< -o $@
-
-all			: $(CHECK) $(PUSH)
-
-$(CHECK)	: $(OBJS_CH) $(OBJS) $(INCS)
-			@make --silent -C $(LIB_DIR)
-			@$(CC) $(OBJS_CH) $(OBJS) $(LIB_NAME) -L$(LIB_DIR) $(LIB_INC) $(MAIN_INC) -o $(CHECK)
-			@echo "checker compiled"
-
-$(PUSH)		: $(OBJS_PS) $(OBJS) $(INCS)
-			@make --silent -C $(LIB_DIR)
-			@$(CC) $(OBJS_PS) $(OBJS) $(LIB_NAME) -L$(LIB_DIR) $(LIB_INC) $(MAIN_INC) -o $(PUSH)
-			@echo "push_swap compiled"
-
-clean:
-			@$(MAKE) clean --silent -C $(LIB_DIR)
-			@$(RM) $(OBJS_PS) $(OBJS_CH) $(OBJS)
-
-fclean		: clean
-			@$(MAKE) fclean --silent -C $(LIB_DIR)
-			@$(RM) $(PUSH) $(CHECK)
+fclean		:
+			@$(MAKE) fclean --silent -C $(PS_DIR)
+			@$(MAKE) fclean --silent -C $(CH_DIR)
 
 re			: fclean all
 
-.PHONY		: all clean fclean re
+full		: re bonus
+
+.PHONY		: all clean fclean re bonus full

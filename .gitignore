@@ -5,3 +5,4 @@ checker
 !sources/checker/
 push_swap
 !sources/push_swap/
+.vscode/*

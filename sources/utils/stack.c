@@ -70,7 +70,7 @@ t_stack	*init_stack(int argc, char **argv)
 	if (stack->size >= 500)
 		stack->nb_chunk = 12;
 	else if (stack->size > 5)
-		stack->nb_chunk = 5;
+		stack->nb_chunk = 8;
 	else if (stack->size > 3)
 		stack->nb_chunk = 2;
 	else
