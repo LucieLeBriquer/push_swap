@@ -94,7 +94,6 @@ _BOLDCOLOR	= \033[32;1m
 _RESET		= \033[0m
 _CLEAR		= \033[0K\r\c
 _OK			= [\033[32mOK\033[0m]
-_CL			= [\033[33mOK\033[0m]
 
 %.o			: %.c
 			@echo "[..] libft... compiling $*.c\r\c"
@@ -112,11 +111,9 @@ norme		:
 
 clean		:
 			@$(RM) $(OBJS)
-			@echo "$(_CL) Cleaning libft files"
 
 fclean		: clean
 			@$(RM) $(NAME)
-			@echo "$(_CL) Cleaning $(NAME)"
 
 re			: fclean all
 

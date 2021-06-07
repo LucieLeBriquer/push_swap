@@ -16,7 +16,7 @@
   - moins de 10000: 2
   - moins de 11500: 1
 
-## Utilisatioj
+## Utilisation
 ```
 entries=($(shuf -i 0-1000 -n 100)) && ./push_swap $entries | ./checker $entries
 ```
