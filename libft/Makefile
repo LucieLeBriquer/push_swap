@@ -3,7 +3,6 @@ CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 NAME		= libft.a
 LIB			= ar rcs
-NORME		= ~/.norminette_v2/norminette.rb
 
 INCS_DIR	= includes/
 INCS		= $(addprefix $(INCS_DIR), libftfull.h libftstruct.h)
@@ -107,7 +106,9 @@ $(NAME)		: $(OBJS) $(INCS)
 			@echo "$(_OK) libft compiled"
 
 norme		:
-			@$(NORME) $(SRCS) $(PRINT_SRCS) $(INCS)
+			@norminette
+			@echo "Checking headers..."
+			@grep -L "\*\*\*" $(SRCS) $(PRINT_SRCS) $(INCS)
 
 clean		:
 			@$(RM) $(OBJS)

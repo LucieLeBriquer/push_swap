@@ -23,7 +23,7 @@ typedef struct s_stack
 	int	*a;
 	int	*b;
 	int	*iso;
-	int *rev_iso;
+	int	*rev_iso;
 	int	*copy;
 	int	size;
 	int	n_b;
@@ -49,13 +49,13 @@ int		duplicate(t_stack stack);
 int		print_error(char *str);
 void	print_stack(t_stack stack);
 t_stack	*init_stack(int argc, char **argv);
-void	free_all(t_stack *stack);
+void	*free_all(t_stack *stack);
 
 /*
 ** push swap
 */
 
-void    isomorphism(t_stack *stack);
+void	isomorphism(t_stack *stack);
 void	rev_move_to_top(t_stack *stack, int pos);
 void	rev_insert_sort(t_stack *stack);
 void	insert_sort(t_stack *stack);

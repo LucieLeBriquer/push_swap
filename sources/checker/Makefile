@@ -5,28 +5,20 @@ NAME_SHORT	= checker
 
 INCS_DIR	= ../../includes/
 MAIN_INC	= -I$(INCS_DIR)
+INCS		= $(shell find $(INCS_DIR) -type f -name "*.h")
 
 LIB_DIR		= ../../libft/
 LIB_INC		= -I$(LIB_DIR)includes/
 LIB_NAME	= $(LIB_DIR)libft.a
 
-INCS		= $(addprefix $(INCS_DIR), push_swap.h)
+SRCS_DIR 	= .
+SRCS		= $(notdir $(shell find $(SRC_DIR) -type f -name "*.c"))
 
-SRCS		= main.c \
-			  execute.c \
-			  useful.c
+UTILS_DIR	= ../utils
+UTILS		= $(addprefix $(UTILS_DIR)/, $(notdir $(shell find $(UTILS_DIR) -type f -name "*.c")))
 
-SRCS_UTILS	= $(addprefix ../utils/, \
-			  check.c \
-			  print.c \
-			  op_push.c \
-			  op_reverse.c \
-			  op_rotate.c \
-			  op_swap.c \
-			  stack.c)
- 
 OBJS		= $(SRCS:.c=.o)
-OBJS_UTILS	= $(SRCS_UTILS:.c=.o)
+OBJS_UTILS	= $(UTILS:.c=.o)
 
 _COLOR		= \033[32m
 _BOLDCOLOR	= \033[32;1m
@@ -54,10 +46,13 @@ fclean		: clean _libft_cl
 
 re			: fclean all
 
+norme		:
+			@norminette $(SRCS) $(UTILS) $(INCS)
+
 _libft		:
 			@make --silent -C $(LIB_DIR)
 
 _libft_cl	:
-			@$(RM) ../../libft/libft.a
+			@$(RM) $(LIB_NAME)
 
-.PHONY		: all clean fclean re _libft _libft_cl
+.PHONY		: all clean fclean re _libft _libft_cl norme

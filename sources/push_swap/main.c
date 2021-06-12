@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 18:00:11 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/06 14:44:17 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/07 20:21:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	push_all(t_stack *stack)
 		if (stack->b[i] + 1 == stack->size)
 		{
 			multiple_rb(stack, i);
-			break;
+			break ;
 		}
 		else if (stack->b[stack->n_b - i - 1] + 1 == stack->size)
 		{
 			multiple_rrb(stack, i + 1);
-			break;
+			break ;
 		}
 	}
 	while (stack->n_b > 0)
@@ -73,13 +73,13 @@ void	generate_code(t_stack *stack)
 				{
 					multiple_ra(stack, i);
 					insert_sort(stack);
-					break;
+					break ;
 				}
 				else if (stack->a[stack->n_a - i - 1] < stack->chunk[c])
 				{
 					multiple_rra(stack, i + 1);
 					insert_sort(stack);
-					break;
+					break ;
 				}
 			}
 		}

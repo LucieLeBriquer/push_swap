@@ -1,29 +1,20 @@
-CC			= clang -Wall -Wextra -Werror
-RM			= rm -rf
-
-CHECK		= checker 
-PUSH		= push_swap
-
 CH_DIR		= sources/checker/
 PS_DIR		= sources/push_swap/
+LIBFT_DIR	= libft/
 
-all			: $(PUSH)
-
-bonus		: $(CHECK)
-
-$(PUSH)		:
+all			:
 			@make --silent -C $(PS_DIR)
 
-$(CHECK)	: $(PUSH)
+bonus		:
 			@make --silent -C $(CH_DIR)
 
 clean		:
-			@$(MAKE) clean --silent -C $(PS_DIR)
-			@$(MAKE) clean --silent -C $(CH_DIR)
+			@make clean --silent -C $(PS_DIR)
+			@make clean --silent -C $(CH_DIR)
 
 fclean		:
-			@$(MAKE) fclean --silent -C $(PS_DIR)
-			@$(MAKE) fclean --silent -C $(CH_DIR)
+			@make fclean --silent -C $(PS_DIR)
+			@make fclean --silent -C $(CH_DIR)
 
 re			: fclean all
 
@@ -31,4 +22,9 @@ refull		: re bonus
 
 full		: all bonus
 
-.PHONY		: all clean fclean re bonus full refull
+norme		:
+			@make norme --silent -C $(CH_DIR)
+			@make norme --silent -C $(PS_DIR)
+			@make norme --silent -C $(LIBFT_DIR)
+
+.PHONY		: all clean fclean re bonus full refull norme
