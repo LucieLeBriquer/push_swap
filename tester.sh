@@ -15,14 +15,18 @@ function test()
     max=0
     min=2147483647
 	tot_error=0
-    for i in `seq 0 $tests`;
+	leaks=0
+    for i in `seq 1 $tests`;
     do
 		entries=$(shuf -i 0-10000 -n $1)
         nb_ope=$(./push_swap $entries | wc -l)
         sum=$(($sum + $nb_ope))
 		if [ "$valgrind" -eq "1" ]
 		then
-			error=$(valgrind -q ./push_swap $entries | ./checker $entries | grep -E "(KO|Error)" | wc -l)
+			error=$(valgrind ./push_swap $entries 2> .valgrind_log | ./checker $entries | grep -E "(KO|Error)" | wc -l)
+			leak=$(cat .valgrind_log | grep "LEAK" | wc -l)
+			leaks=$(($leaks + $leak))
+			rm .valgrind_log
 		else
 			error=$(./push_swap $entries | ./checker $entries | grep -E "(KO|Error)" | wc -l)
 		fi
@@ -44,7 +48,18 @@ function test()
 	else
 		printf "${RED}[KO]${NC}"
 	fi
-	printf "\t$1\t${BLUE}$X${NC}\t${PURPLE}$max${NC}\t${CYAN}$min${NC}\n"
+	printf "\t$1\t${BLUE}$X${NC}\t${PURPLE}$max${NC}\t${CYAN}$min${NC}"
+	if [ "$valgrind" -eq "1" ]
+	then
+		if [ "$leaks" -eq "0" ]
+		then
+			printf "\t${GREEN}OK${NC}\n"
+		else
+			printf "\t${RED}KO${NC}\n"
+		fi
+	else
+		printf "\n"
+	fi
 }
 
 valgrind=0
@@ -60,14 +75,15 @@ if [ "$valgrind" -eq "1" ]
 then
 	tests=10
 	printf "$tests tests per argument, also checking leaks\n\n"
+	printf "\tnbs\tavg.\tmax\tmin\tleaks\n"
 else
 	tests=100
 	printf "$tests tests per argument, not checking leaks\n\n"
+	printf "\tnbs\tavg.\tmax\tmin\n"
 fi
 
 re='^[0-9]+$'
 
-printf "\tnbs\tavg.\tmax\tmin\n"
 for arg in $@
 do
 	if [ $arg != "-v" ]
