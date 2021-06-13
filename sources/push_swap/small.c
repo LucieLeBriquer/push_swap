@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 20:23:44 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/07 20:23:49 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 18:54:55 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,21 @@ void	generate_size5(t_stack *stack)
 	while (++pos < stack->n_a && stack->a[pos] > 0)
 		;
 	rev_move_to_top(stack, pos);
+}
+
+void	generate_simple(t_stack *stack)
+{
+	if (stack->size == 1)
+		return ;
+	if (stack->size == 2)
+	{
+		if (stack->a[0] < stack->a[1])
+			return ;
+		ft_putstr("sa\n");
+		execute_sa(stack);
+		return ;
+	}
+	if (stack->size == 3)
+		return (generate_size3(stack));
+	generate_size5(stack);
 }

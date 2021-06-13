@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:20:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/06 14:43:26 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 18:56:31 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ int		print_error(char *str);
 void	print_stack(t_stack stack);
 t_stack	*init_stack(int argc, char **argv);
 void	*free_all(t_stack *stack);
+void	generate_code(t_stack *stack);
+void	generate_simple(t_stack *stack);
+int		define_chunks(t_stack *stack);
+void	generate_complex(t_stack *stack);
 
 /*
 ** push swap
