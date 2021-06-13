@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 22:52:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 23:06:13 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,23 @@ void	*free_all(t_stack *stack)
 	return (NULL);
 }
 
+static void	fill_stack_aux(t_stack *stack, char **split, int *l)
+{
+	int	k;
+
+	k = 0;
+	while (split[k])
+	{
+		stack->a[*l] = ft_atoi(split[k]);
+		(*l)++;
+		k++;
+	}
+}
+
 static int	fill_stack(t_stack *stack, char **argv, int argc)
 {
 	int		i;
 	int		j;
-	int		k;
 	int		l;
 	char	**split;
 
@@ -44,13 +56,7 @@ static int	fill_stack(t_stack *stack, char **argv, int argc)
 		split = ft_splitchar(argv[i], ' ');
 		if (!split)
 			return (1);
-		k = 0;
-		while (split[k])
-		{
-			stack->a[l] = ft_atoi(split[k]);
-			l++;
-			k++;
-		}
+		fill_stack_aux(stack, split, &l);
 		j = -1;
 		while (++j + 1 < l)
 		{
