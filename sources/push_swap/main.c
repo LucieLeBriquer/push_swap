@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 21:03:07 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 21:03:30 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 22:33:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ int	is_already_sorted(t_stack stack)
 int	main(int argc, char **argv)
 {
 	t_stack	*stack;
+	int		args;
 
 	if (argc == 1)
 		return (0);
-	if (check_args(argc, argv))
+	if (check_args(argc, argv, &args))
 		return (print_error("Error\n"));
-	stack = init_stack(argc, argv);
+	stack = init_stack(argc, argv, args);
 	if (!stack)
 		return (print_error("Error\n"));
 	isomorphism(stack);

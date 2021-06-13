@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:20:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 19:53:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 22:38:35 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ enum	{SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR};
 ** general
 */
 
-int		check_args(int argc, char **argv);
+int		check_args(int argc, char **argv, int *tot_size);
 int		execute_instructions(t_stack *stack);
 int		is_instruction(char *str);
 void	print_stack(t_stack stack);
@@ -46,7 +46,7 @@ void	check_sorted(t_stack stack);
 int		duplicate(t_stack stack);
 int		print_error(char *str);
 void	print_stack(t_stack stack);
-t_stack	*init_stack(int argc, char **argv);
+t_stack	*init_stack(int argc, char **argv, int tot_size);
 void	*free_all(t_stack *stack);
 void	generate_code(t_stack *stack);
 void	generate_simple(t_stack *stack);
@@ -55,7 +55,7 @@ void	generate_complex(t_stack *stack);
 void	push_chunk_on_b(t_stack *stack, int c);
 void	put_on_bot_smallest_sorted(t_stack *stack, int c);
 int		is_in_chunk(t_stack stack, int c, int number);
-
+int		free_split(char **split);
 /*
 ** push swap
 */

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 20:45:26 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 22:52:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,56 @@ void	*free_all(t_stack *stack)
 	return (NULL);
 }
 
-static int	fill_stack(t_stack *stack, char **argv)
+static int	fill_stack(t_stack *stack, char **argv, int argc)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	char	**split;
 
-	i = -1;
-	while (++i < stack->size)
+	i = 0;
+	l = 0;
+	while (++i < argc)
 	{
-		stack->a[i] = ft_atoi(argv[i + 1]);
-		j = -1;
-		while (++j < i - 1)
+		split = ft_splitchar(argv[i], ' ');
+		if (!split)
+			return (1);
+		k = 0;
+		while (split[k])
 		{
-			if (stack->a[i] == stack->a[j])
-				return (1);
+			stack->a[l] = ft_atoi(split[k]);
+			l++;
+			k++;
 		}
+		j = -1;
+		while (++j + 1 < l)
+		{
+			if (stack->a[l - 1] == stack->a[j])
+				return (free_split(split));
+		}
+		free_split(split);
 	}
 	stack->n_a = stack->size;
 	stack->n_b = 0;
 	return (0);
 }
 
-t_stack	*init_stack(int argc, char **argv)
+t_stack	*init_stack(int argc, char **argv, int tot_size)
 {
 	t_stack	*stack;
 
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
-	stack->size = argc - 1;
+	stack->size = tot_size;
 	stack->a = malloc(stack->size * sizeof(int));
 	stack->b = malloc(stack->size * sizeof(int));
 	stack->copy = malloc(stack->size * sizeof(int));
 	stack->chunk = NULL;
 	if (!stack->a || !stack->b || !stack->copy)
 		return (free_all(stack));
-	if (fill_stack(stack, argv))
+	if (fill_stack(stack, argv, argc))
 		return (free_all(stack));
 	return (stack);
 }

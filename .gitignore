@@ -2,6 +2,7 @@
 *.pdf
 *.swp
 checker
+checker_linux
 !sources/checker/
 push_swap
 !sources/push_swap/

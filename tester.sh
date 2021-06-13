@@ -1,6 +1,10 @@
 #!/bin/bash
 
-tests=10
+CHECKER_PATH=./checker
+PUSHSWAP_PATH=./push_swap
+
+## colors
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -8,6 +12,24 @@ BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m'
+
+## check if checker and push_swap files are here
+
+pushswap_ok=$(ls $PUSHSWAP_PATH 2>/dev/null | wc -l)
+if [ "$pushswap_ok" -eq "0" ]
+then
+	printf "push_swap needed, please update PUSHSWAP_PATH\n"
+	exit 0
+fi
+
+checker_ok=$(ls $CHECKER_PATH 2>/dev/null | wc -l)
+if [ "$checker_ok" -eq "0" ]
+then
+	printf "checker needed, please update CHECKER_PATH\n"
+	exit 0
+fi
+
+## test function
 
 function test()
 {
@@ -19,16 +41,16 @@ function test()
     for i in `seq 1 $tests`;
     do
 		entries=$(shuf -i 0-10000 -n $1)
-        nb_ope=$(./push_swap $entries | wc -l)
+        nb_ope=$($PUSHSWAP_PATH $entries | wc -l)
         sum=$(($sum + $nb_ope))
 		if [ "$valgrind" -eq "1" ]
 		then
-			error=$(valgrind ./push_swap $entries 2> .valgrind_log | ./checker $entries | grep -E "(KO|Error)" | wc -l)
+			error=$(valgrind $PUSHSWAP_PATH $entries 2> .valgrind_log | $CHECKER_PATH $entries | grep -E "(KO|Error)" | wc -l)
 			leak=$(cat .valgrind_log | grep "LEAK" | wc -l)
 			leaks=$(($leaks + $leak))
 			rm .valgrind_log
 		else
-			error=$(./push_swap $entries | ./checker $entries | grep -E "(KO|Error)" | wc -l)
+			error=$($PUSHSWAP_PATH $entries | $CHECKER_PATH $entries | grep -E "(KO|Error)" | wc -l)
 		fi
 		tot_error=$(($tot_error + $error))
         if [ "$nb_ope" -lt "$min" ]
@@ -62,6 +84,8 @@ function test()
 	fi
 }
 
+## valgrind option
+
 valgrind=0
 for arg in $@
 do
@@ -70,6 +94,8 @@ do
     	valgrind=1
 	fi
 done
+
+## title
 
 if [ "$valgrind" -eq "1" ]
 then
@@ -81,6 +107,8 @@ else
 	printf "$tests tests per argument, not checking leaks\n\n"
 	printf "\tnbs\tavg.\tmax\tmin\n"
 fi
+
+## main
 
 re='^[0-9]+$'
 

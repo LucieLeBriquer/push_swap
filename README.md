@@ -20,3 +20,16 @@
 ```
 entries=($(shuf -i 0-1000 -n 100)) && ./push_swap $entries | ./checker $entries
 ```
+
+## Utilisation du tester
+Pour tester pour les tailles `n1` `n2` `n3` : 
+```
+./tester.sh n1 n2 n3
+```
+Pour en plus checker les leaks :
+```
+./tester.sh -v n1 n2 n3
+```
+
+## TODO
+- split des arguments
