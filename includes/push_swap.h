@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:20:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 18:56:31 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:02:22 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ void	generate_code(t_stack *stack);
 void	generate_simple(t_stack *stack);
 int		define_chunks(t_stack *stack);
 void	generate_complex(t_stack *stack);
+void	push_chunk_on_b(t_stack *stack, int c);
+void	put_on_bot_smallest_sorted(t_stack *stack, int c);
+int		is_in_chunk(t_stack stack, int c, int number);
 
 /*
 ** push swap
