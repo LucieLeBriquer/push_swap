@@ -106,9 +106,7 @@ $(NAME)		: $(OBJS) $(INCS)
 			@echo "$(_OK) libft compiled"
 
 norme		:
-			@norminette
-			@echo "Checking headers..."
-			@grep -L "\*\*\*" $(SRCS) $(PRINT_SRCS) $(INCS)
+			@norminette $(SRCS) $(INCS) $(PRINT_SRCS)
 
 clean		:
 			@$(RM) $(OBJS)

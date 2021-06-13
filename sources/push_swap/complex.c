@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 18:56:05 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 19:01:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 20:55:40 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static void	push_and_maj(t_stack *stack, int *min, int *max)
 		(*max)--;
 }
 
+static int	is_min_or_max(int number, int min, int max)
+{
+	return (number == min || number == max);
+}
+
 static void	push_sorted_on_a(t_stack *stack, int c)
 {
 	int	max;
@@ -39,13 +44,13 @@ static void	push_sorted_on_a(t_stack *stack, int c)
 		i = -1;
 		while (++i < stack->n_b / 2 + 1)
 		{
-			if (stack->b[i] == min || stack->b[i] == max)
+			if (is_min_or_max(stack->b[i], min, max))
 			{
 				multiple_rb(stack, i);
 				push_and_maj(stack, &min, &max);
 				break ;
 			}
-			else if (stack->b[stack->n_b - i - 1] == min || stack->b[stack->n_b - i - 1] == max)
+			else if (is_min_or_max(stack->b[stack->n_b - i - 1], min, max))
 			{
 				multiple_rrb(stack, i + 1);
 				push_and_maj(stack, &min, &max);

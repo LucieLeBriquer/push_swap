@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 18:56:05 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 20:04:05 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 20:49:29 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,24 @@ int	is_in_chunk(t_stack stack, int c, int number)
 	return (stack.chunk[c] <= number && number < stack.chunk[c + 1]);
 }
 
-void	push_chunk_on_b(t_stack *stack, int c)
+static void	push_and_rev(t_stack *stack, int c)
 {
 	int	mediane;
-	int	i;
 
 	mediane = (stack->chunk[c + 1] + stack->chunk[c]) / 2;
+	ft_putstr("pb\n");
+	execute_pb(stack);
+	if (stack->b[0] > mediane)
+	{
+		ft_putstr("rb\n");
+		execute_rb(stack);
+	}
+}
+
+void	push_chunk_on_b(t_stack *stack, int c)
+{
+	int	i;
+
 	while (stack->n_b < stack->chunk[c + 1] - stack->chunk[c])
 	{
 		i = -1;
@@ -55,13 +67,7 @@ void	push_chunk_on_b(t_stack *stack, int c)
 				break ;
 			}
 		}
-		ft_putstr("pb\n");
-		execute_pb(stack);
-		if (stack->b[0] > mediane)
-		{
-			ft_putstr("rb\n");
-			execute_rb(stack);
-		}
+		push_and_rev(stack, c);
 	}
 }
 
