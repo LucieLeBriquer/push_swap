@@ -1,9 +1,12 @@
 #!/bin/bash
 
-tests=200
+tests=100
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-COLOR='\033[0;33m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
 NC='\033[0m'
 
 function test()
@@ -17,7 +20,7 @@ function test()
 		entries=$(shuf -i 0-10000 -n $1)
         nb_ope=$(./push_swap $entries | wc -l)
         sum=$(($sum + $nb_ope))
-		error=$(./push_swap $entries | ./checker $entries | grep KO | wc -l)
+		error=$(./push_swap $entries | ./checker $entries | grep -E "(KO|Error)" | wc -l)
 		tot_error=$(($tot_error + $error))
         if [ "$nb_ope" -lt "$min" ]
         then
@@ -30,16 +33,16 @@ function test()
     done
 
     X=`echo "$sum / $tests" | bc`
-	printf "$1\t${COLOR}$X${NC}\t${RED}$max${NC}\t${GREEN}$min${NC}"
 	if [ "$error" -eq "0" ]
 	then
-		printf "\t\t${GREEN}[OK]${NC}\n\n"
+		printf "${GREEN}[OK]${NC}"
 	else
-		printf "\t\t${RED}[KO]${NC}\n\n"
+		printf "${RED}[KO]${NC}"
 	fi
+	printf "\t$1\t${BLUE}$X${NC}\t${PURPLE}$max${NC}\t${CYAN}$min${NC}\n"
 }
 
-printf "nbs\tavg.\tmax\tmin\n\n"
+printf "\tnbs\tavg.\tmax\tmin\n\n"
 for arg in $@
 do
     test $arg

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/06 14:43:39 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:32:48 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	main(int argc, char **argv)
 	stack = init_stack(argc, argv);
 	if (!stack)
 		return (print_error("Error\n"));
-	execute_instructions(stack);
+	if (execute_instructions(stack))
+		return (0);
 	check_sorted(*stack);
 	free_all(stack);
 	return (0);

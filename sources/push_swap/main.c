@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 18:00:11 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 19:10:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:36:13 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	main(int argc, char **argv)
 	if (is_already_sorted(*stack))
 		return (0);
 	generate_code(stack);
-	ft_printf("ra\n");
 	free_all(stack);
 	return (0);
 }

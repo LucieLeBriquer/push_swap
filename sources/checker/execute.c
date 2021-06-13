@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:52:38 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/03 16:44:54 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:31:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ int	execute_instructions(t_stack *stack)
 		op = is_instruction(line);
 		if (op >= 0)
 			execute_ope(op, stack);
+		else
+		{
+			ft_putstr("Error\n");
+			return (-1);
+		}
 	}
 	return (0);
 }
