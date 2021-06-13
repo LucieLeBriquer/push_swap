@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:52:38 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/04 23:14:21 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:50:26 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	execute_ra(t_stack *stack)
 		return ;
 	swap = stack->a[0];
 	i = -1;
-	while (++i < stack->n_a)
+	while (++i + 1 < stack->n_a)
 		stack->a[i] = stack->a[i + 1];
 	stack->a[stack->n_a - 1] = swap;
 }
@@ -35,7 +35,7 @@ void	execute_rb(t_stack *stack)
 		return ;
 	swap = stack->b[0];
 	i = -1;
-	while (++i < stack->n_b)
+	while (++i + 1 < stack->n_b)
 		stack->b[i] = stack->b[i + 1];
 	stack->b[stack->n_b - 1] = swap;
 }

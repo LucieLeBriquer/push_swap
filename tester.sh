@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tests=100
+tests=10
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -20,7 +20,12 @@ function test()
 		entries=$(shuf -i 0-10000 -n $1)
         nb_ope=$(./push_swap $entries | wc -l)
         sum=$(($sum + $nb_ope))
-		error=$(./push_swap $entries | ./checker $entries | grep -E "(KO|Error)" | wc -l)
+		if [ "$valgrind" -eq "1" ]
+		then
+			error=$(valgrind -q ./push_swap $entries | ./checker $entries | grep -E "(KO|Error)" | wc -l)
+		else
+			error=$(./push_swap $entries | ./checker $entries | grep -E "(KO|Error)" | wc -l)
+		fi
 		tot_error=$(($tot_error + $error))
         if [ "$nb_ope" -lt "$min" ]
         then
@@ -42,8 +47,34 @@ function test()
 	printf "\t$1\t${BLUE}$X${NC}\t${PURPLE}$max${NC}\t${CYAN}$min${NC}\n"
 }
 
-printf "\tnbs\tavg.\tmax\tmin\n\n"
+valgrind=0
 for arg in $@
 do
-    test $arg
+	if [ $arg = "-v" ]
+	then
+    	valgrind=1
+	fi
+done
+
+if [ "$valgrind" -eq "1" ]
+then
+	tests=10
+	printf "$tests tests per argument, also checking leaks\n\n"
+else
+	tests=100
+	printf "$tests tests per argument, not checking leaks\n\n"
+fi
+
+re='^[0-9]+$'
+
+printf "\tnbs\tavg.\tmax\tmin\n"
+for arg in $@
+do
+	if [ $arg != "-v" ]
+	then
+		if [[ $arg =~ $re ]]
+		then
+    		test $arg $valgrind
+		fi
+	fi
 done

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 18:00:11 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 19:36:13 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 20:02:45 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	main(int argc, char **argv)
 		return (print_error("Error\n"));
 	isomorphism(stack);
 	if (is_already_sorted(*stack))
+	{
+		free_all(stack);
 		return (0);
+	}
 	generate_code(stack);
 	free_all(stack);
 	return (0);

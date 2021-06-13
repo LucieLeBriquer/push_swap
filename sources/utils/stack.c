@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/07 20:24:46 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 20:04:46 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 void	*free_all(t_stack *stack)
 {
-	if (stack->a)
-		free(stack->a);
-	if (stack->b)
-		free(stack->b);
-	if (stack->iso)
-		free(stack->iso);
 	if (stack)
+	{
+		if (stack->a)
+			free(stack->a);
+		if (stack->b)
+			free(stack->b);
+		if (stack->copy)
+			free(stack->copy);
+		if (stack->chunk)
+			free(stack->chunk);
 		free(stack);
+	}
 	return (NULL);
 }
 
@@ -46,29 +50,6 @@ static int	fill_stack(t_stack *stack, char **argv)
 	return (0);
 }
 
-static void	fill_chunks(t_stack *stack)
-{
-	int	i;
-
-	stack->chunk[0] = stack->size / stack->nb_chunk;
-	i = 0;
-	while (++i < stack->nb_chunk - 1)
-		stack->chunk[i] = stack->chunk[0] * i;
-	stack->chunk[stack->nb_chunk - 1] = stack->size;
-}
-
-static void	nb_of_chunks(t_stack *stack)
-{
-	if (stack->size >= 500)
-		stack->nb_chunk = 12;
-	else if (stack->size > 5)
-		stack->nb_chunk = 8;
-	else if (stack->size > 3)
-		stack->nb_chunk = 2;
-	else
-		stack->nb_chunk = 1;
-}
-
 t_stack	*init_stack(int argc, char **argv)
 {
 	t_stack	*stack;
@@ -80,11 +61,9 @@ t_stack	*init_stack(int argc, char **argv)
 	stack->a = malloc(stack->size * sizeof(int));
 	stack->b = malloc(stack->size * sizeof(int));
 	stack->copy = malloc(stack->size * sizeof(int));
-	nb_of_chunks(stack);
-	stack->chunk = malloc(stack->nb_chunk * sizeof(int));
-	if (!stack->a || !stack->b || !stack->copy || !stack->chunk)
+	stack->chunk = NULL;
+	if (!stack->a || !stack->b || !stack->copy)
 		return (free_all(stack));
-	fill_chunks(stack);
 	if (fill_stack(stack, argv))
 		return (free_all(stack));
 	return (stack);

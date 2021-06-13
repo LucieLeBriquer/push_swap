@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:20:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 19:02:22 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:53:00 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ typedef struct s_stack
 {
 	int	*a;
 	int	*b;
-	int	*iso;
-	int	*rev_iso;
 	int	*copy;
 	int	size;
 	int	n_b;
