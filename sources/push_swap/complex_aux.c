@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 18:56:05 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 20:49:29 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 17:51:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static void	push_and_rev(t_stack *stack, int c)
 	int	mediane;
 
 	mediane = (stack->chunk[c + 1] + stack->chunk[c]) / 2;
-	ft_putstr("pb\n");
+	add_move(stack, "pb\n");
 	execute_pb(stack);
 	if (stack->b[0] > mediane)
 	{
-		ft_putstr("rb\n");
+		add_move(stack, "rb\n");
 		execute_rb(stack);
 	}
 }

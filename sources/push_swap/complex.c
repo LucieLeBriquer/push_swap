@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 18:56:05 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 20:55:40 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 17:50:57 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	push_and_maj(t_stack *stack, int *min, int *max)
 {
-	ft_putstr("pa\n");
+	add_move(stack, "pa\n");
 	execute_pa(stack);
 	if (stack->a[0] == *min)
 	{
-		ft_putstr("ra\n");
+		add_move(stack, "ra\n");
 		execute_ra(stack);
 		(*min)++;
 	}
@@ -72,7 +72,7 @@ void	generate_complex(t_stack *stack)
 		push_sorted_on_a(stack, c);
 		while (is_in_chunk(*stack, c, stack->a[0]))
 		{
-			ft_putstr("ra\n");
+			add_move(stack, "ra\n");
 			execute_ra(stack);
 		}
 	}

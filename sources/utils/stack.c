@@ -6,11 +6,17 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 23:06:13 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 18:39:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	free_one(void *content)
+{
+	(void)content;
+	return ;
+}
 
 void	*free_all(t_stack *stack)
 {
@@ -24,6 +30,8 @@ void	*free_all(t_stack *stack)
 			free(stack->copy);
 		if (stack->chunk)
 			free(stack->chunk);
+		if (stack->moves)
+			ft_lstclear(&(stack->moves), &free_one);
 		free(stack);
 	}
 	return (NULL);
@@ -65,8 +73,6 @@ static int	fill_stack(t_stack *stack, char **argv, int argc)
 		}
 		free_split(split);
 	}
-	stack->n_a = stack->size;
-	stack->n_b = 0;
 	return (0);
 }
 
@@ -77,11 +83,14 @@ t_stack	*init_stack(int argc, char **argv, int tot_size)
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
+	stack->chunk = NULL;
+	stack->moves = NULL;
 	stack->size = tot_size;
+	stack->n_a = stack->size;
+	stack->n_b = 0;
 	stack->a = malloc(stack->size * sizeof(int));
 	stack->b = malloc(stack->size * sizeof(int));
 	stack->copy = malloc(stack->size * sizeof(int));
-	stack->chunk = NULL;
 	if (!stack->a || !stack->b || !stack->copy)
 		return (free_all(stack));
 	if (fill_stack(stack, argv, argc))

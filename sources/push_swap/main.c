@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 21:03:07 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 22:33:54 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 18:39:59 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	generate_code(stack);
+	print_reduce_moves(*stack);
 	free_all(stack);
 	return (0);
 }

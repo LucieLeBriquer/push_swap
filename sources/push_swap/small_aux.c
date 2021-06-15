@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 20:23:44 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 20:49:40 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 17:51:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	rev_insert_sort(t_stack *stack)
 		}
 	}
 	rev_move_closest(stack, to_insert, closest);
-	ft_putstr("pa\n");
+	add_move(stack, "pa\n");
 	execute_pa(stack);
 }

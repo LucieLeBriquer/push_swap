@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 20:23:44 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 20:49:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 17:51:50 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static void	size3_aux(t_stack *stack)
 {
 	if (stack->a[1] > stack->a[2] && stack->a[2] > stack->a[0])
 	{
-		ft_putstr("sa\nra\n");
+		add_move(stack, "sa\nra\n");
 		execute_sa(stack);
 		return (execute_ra(stack));
 	}
 	if (stack->a[1] > stack->a[0] && stack->a[0] > stack->a[2])
 	{
-		ft_putstr("rra\n");
+		add_move(stack, "rra\n");
 		return (execute_rra(stack));
 	}
 }
@@ -31,18 +31,18 @@ void	generate_size3(t_stack *stack)
 {
 	if (stack->a[2] > stack->a[0] && stack->a[0] > stack->a[1])
 	{
-		ft_putstr("sa\n");
+		add_move(stack, "sa\n");
 		return (execute_sa(stack));
 	}
 	if (stack->a[0] > stack->a[1] && stack->a[1] > stack->a[2])
 	{
-		ft_putstr("sa\nrra\n");
+		add_move(stack, "sa\nrra\n");
 		execute_sa(stack);
 		return (execute_rra(stack));
 	}
 	if (stack->a[0] > stack->a[2] && stack->a[2] > stack->a[1])
 	{
-		ft_putstr("ra\n");
+		add_move(stack, "ra\n");
 		return (execute_ra(stack));
 	}
 	return (size3_aux(stack));
@@ -54,7 +54,7 @@ void	generate_size5(t_stack *stack)
 
 	while (stack->n_a > 3)
 	{
-		ft_putstr("pb\n");
+		add_move(stack, "pb\n");
 		execute_pb(stack);
 	}
 	generate_size3(stack);
@@ -75,7 +75,7 @@ void	generate_simple(t_stack *stack)
 	{
 		if (stack->a[0] < stack->a[1])
 			return ;
-		ft_putstr("sa\n");
+		add_move(stack, "sa\n");
 		execute_sa(stack);
 		return ;
 	}

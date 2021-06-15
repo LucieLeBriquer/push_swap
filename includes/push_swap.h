@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:20:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 22:38:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 18:39:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@
 
 typedef struct s_stack
 {
-	int	*a;
-	int	*b;
-	int	*copy;
-	int	size;
-	int	n_b;
-	int	n_a;
-	int	*chunk;
-	int	nb_chunk;
+	int		*a;
+	int		*b;
+	int		*copy;
+	int		size;
+	int		n_b;
+	int		n_a;
+	int		*chunk;
+	int		nb_chunk;
+	t_list	*moves;
 }		t_stack;
 
 typedef void	(*t_ope)(t_stack *stack);
@@ -56,6 +57,9 @@ void	push_chunk_on_b(t_stack *stack, int c);
 void	put_on_bot_smallest_sorted(t_stack *stack, int c);
 int		is_in_chunk(t_stack stack, int c, int number);
 int		free_split(char **split);
+void	add_move(t_stack *stack, char *move);
+void	print_reduce_moves(t_stack stack);
+
 /*
 ** push swap
 */
