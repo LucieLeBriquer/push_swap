@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:48:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/15 18:39:05 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 19:18:19 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,8 @@ static int	fill_stack(t_stack *stack, char **argv, int argc)
 	return (0);
 }
 
-t_stack	*init_stack(int argc, char **argv, int tot_size)
+int	init_stack(int argc, char **argv, int tot_size, t_stack *stack)
 {
-	t_stack	*stack;
-
-	stack = malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
 	stack->chunk = NULL;
 	stack->moves = NULL;
 	stack->size = tot_size;
@@ -92,8 +87,14 @@ t_stack	*init_stack(int argc, char **argv, int tot_size)
 	stack->b = malloc(stack->size * sizeof(int));
 	stack->copy = malloc(stack->size * sizeof(int));
 	if (!stack->a || !stack->b || !stack->copy)
-		return (free_all(stack));
+	{
+		free_all(stack);
+		return (1);
+	}
 	if (fill_stack(stack, argv, argc))
-		return (free_all(stack));
-	return (stack);
+	{
+		free_all(stack);
+		return (1);
+	}
+	return (0);
 }

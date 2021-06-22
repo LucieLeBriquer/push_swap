@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 21:03:07 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/15 19:05:17 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 19:15:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	main(int argc, char **argv)
 		return (0);
 	if (check_args(argc, argv, &args))
 		return (print_error("Error\n"));
-	stack = init_stack(argc, argv, args);
-	if (!stack)
+	stack = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack || init_stack(argc, argv, args, stack))
 		return (print_error("Error\n"));
 	isomorphism(stack);
 	if (is_already_sorted(*stack))

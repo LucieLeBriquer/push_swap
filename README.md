@@ -34,3 +34,4 @@ Pour en plus checker les leaks :
 ## TODO
 - split des arguments
 - fix la valeur non initialisée
+- fix les leaks dans checker

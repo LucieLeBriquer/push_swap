@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:20:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/15 18:39:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/15 19:11:47 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_sorted(t_stack stack);
 int		duplicate(t_stack stack);
 int		print_error(char *str);
 void	print_stack(t_stack stack);
-t_stack	*init_stack(int argc, char **argv, int tot_size);
+int		init_stack(int argc, char **argv, int tot_size, t_stack *stack);
 void	*free_all(t_stack *stack);
 void	generate_code(t_stack *stack);
 void	generate_simple(t_stack *stack);
