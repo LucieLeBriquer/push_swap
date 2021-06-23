@@ -1,4 +1,4 @@
-CC			= clang -Wall -Wextra -Werror
+CC			= clang -Wall -Wextra -Werror -fsanitize=address
 RM			= rm -rf
 NAME		= ../../checker
 NAME_SHORT	= checker
