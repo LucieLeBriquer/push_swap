@@ -37,7 +37,7 @@ function random_entry()
 {
 	if [ $UNAME == "Darwin" ]
 	then
-		entries=$(jot -r $1 0 10000)
+		entries=$(jot -r $1 0 10000 | tr '\n' ' ')
 	else
 		entries=$(shuf -i 0-10000 -n $1)
 	fi
