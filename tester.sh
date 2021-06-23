@@ -29,6 +29,20 @@ then
 	exit 0
 fi
 
+## generate random numbers
+
+UNAME=$(uname -s)
+
+function random_entry()
+{
+	if [ $UNAME == "Darwin" ]
+	then
+		entries=$(jot -r $1 0 10000)
+	else
+		entries=$(shuf -i 0-10000 -n $1)
+	fi
+}
+
 ## test function
 
 function test()
@@ -40,8 +54,7 @@ function test()
 	leaks=0
     for i in `seq 1 $tests`;
     do
-		#entries=$(shuf -i 0-10000 -n $1)
-		entries=$(jot -r $1 0 10000)
+		random_entry $1
         nb_ope=$($PUSHSWAP_PATH $entries | wc -l)
         sum=$(($sum + $nb_ope))
 		if [ "$valgrind" -eq "1" ]
