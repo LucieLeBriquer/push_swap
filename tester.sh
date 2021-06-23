@@ -40,7 +40,8 @@ function test()
 	leaks=0
     for i in `seq 1 $tests`;
     do
-		entries=$(shuf -i 0-10000 -n $1)
+		#entries=$(shuf -i 0-10000 -n $1)
+		entries=$(jot -r $1 0 10000)
         nb_ope=$($PUSHSWAP_PATH $entries | wc -l)
         sum=$(($sum + $nb_ope))
 		if [ "$valgrind" -eq "1" ]
@@ -70,7 +71,7 @@ function test()
 	else
 		printf "${RED}[KO]${NC}"
 	fi
-	printf "\t$1\t${BLUE}$X${NC}\t${PURPLE}$max${NC}\t${CYAN}$min${NC}"
+	printf "\t$1\t${BLUE}%-d${NC}\t${PURPLE}%-d${NC}\t${CYAN}%-d${NC}" $X $max $min
 	if [ "$valgrind" -eq "1" ]
 	then
 		if [ "$leaks" -eq "0" ]

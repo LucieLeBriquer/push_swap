@@ -5,17 +5,17 @@ NAME_SHORT	= push_swap
 
 INCS_DIR	= ../../includes/
 MAIN_INC	= -I$(INCS_DIR)
-INCS		= $(shell find $(INCS_DIR) -type f -name "*.h")
+INCS		= $(find $(INCS_DIR) -type f -name "*.h")
 
 LIB_DIR		= ../../libft/
 LIB_INC		= -I$(LIB_DIR)includes/
 LIB_NAME	= $(LIB_DIR)libft.a
 
 SRCS_DIR 	= .
-SRCS		= $(notdir $(shell find $(SRC_DIR) -type f -name "*.c"))
+SRCS		= $(shell find $(SRCS_DIR) -type f -name "*.c")
 
 UTILS_DIR	= ../utils
-UTILS		= $(addprefix $(UTILS_DIR)/, $(notdir $(shell find $(UTILS_DIR) -type f -name "*.c")))
+UTILS		= $(addprefix $(UTILS_DIR)/, $(shell find $(UTILS_DIR) -type f -name "*.c"))
 
 OBJS		= $(SRCS:.c=.o)
 OBJS_UTILS	= $(UTILS:.c=.o)
