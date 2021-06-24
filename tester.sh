@@ -21,7 +21,7 @@ function display_help()
 	printf "\twhere n0,n1,n2 are several sizes of input\n\n"
 	printf "options:\n"
 	printf "\t-v --valgrind\trun with valgrind to check leaks and errors\n"
-	printf "\t-h --help\tdisplay help\n\n"
+	printf "\t-h --help\tdisplay this help\n\n"
 	printf "example: ./tester.sh 3 5 100 500\n"
 	exit
 }
