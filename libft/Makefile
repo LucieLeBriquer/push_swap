@@ -1,5 +1,5 @@
 CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 NAME		= libft.a
 LIB			= ar rcs

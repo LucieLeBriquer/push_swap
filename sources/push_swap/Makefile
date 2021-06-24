@@ -1,4 +1,4 @@
-CC			= clang -Wall -Wextra -Werror -fsanitize=address
+CC			= clang -Wall -Wextra -Werror
 RM			= rm -rf
 NAME		= ../../push_swap
 NAME_SHORT	= push_swap
