@@ -92,13 +92,11 @@ function standard_test_errors()
 	then
 		printf "${RED}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
 		fail=1
+	elif [ "$leak" -ne "0" ]
+	then
+		printf "${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
 	else
-		if [ "$leak" -ne "0" ]
-		then
-			printf "${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
-		else
-			printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
-		fi
+		printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
 	fi
 
 	test=$($VALGRIND $PUSHSWAP_PATH "0 1" "3 2 0" 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
@@ -108,13 +106,11 @@ function standard_test_errors()
 	then
 		printf "${RED}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
 		fail=1
+	elif [ "$leak" -ne "0" ]
+	then
+		printf "${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
 	else
-		if [ "$leak" -ne "0" ]
-		then
-			printf "${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
-		else
-			printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
-		fi
+		printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
 	fi
 
 	cmd="$CHECKER_PATH 0 2 one 3"
@@ -161,21 +157,15 @@ function test()
 		random_entry $1
         nb_ope=$($PUSHSWAP_PATH $entries | wc -l)
         sum=$(($sum + $nb_ope))
-		if [ "$valgrind" -eq "1" ]
+		error=$($VALGRIND $PUSHSWAP_PATH $entries 2> .log | $VALGRIND $CHECKER_PATH $entries 2>> .log 1>>.log ; cat .log | grep -E "(KO|Error)" | wc -l)
+		leak=$(cat .log | grep "LEAK" | wc -l)
+		error_valgrind=$(cat .log | grep "ERROR SUMMARY" | cut -d':' -f2 | cut -d'e' -f1 | cut -d' ' -f2)
+		leaks=$(($leaks + $leak))
+		if [ "$errors_valgrind" -ne "0" ]
 		then
-			error=$(valgrind $PUSHSWAP_PATH $entries 2> .log | valgrind $CHECKER_PATH $entries 2>> .log 1>>.log ; cat .log | grep -E "(KO|Error)" | wc -l)
-			leak=$(cat .log | grep "LEAK" | wc -l)
-			error_valgrind=$(cat .log | grep "ERROR SUMMARY" | cut -d':' -f2 | cut -d'e' -f1 | cut -d' ' -f2)
-			leaks=$(($leaks + $leak))
-			if [ "$errors_valgrind" -ne "0" ]
-			then
-				errors_valgrind=$(($errors_valgrind + 1))
-			fi
-			rm .log
-		else
-			error=$($PUSHSWAP_PATH $entries 2> .log | $CHECKER_PATH $entries 2>> .log 1>>.log ; cat .log | grep -E "(KO|Error)" | wc -l)
-			rm .log
+			errors_valgrind=$(($errors_valgrind + 1))
 		fi
+		rm .log
 		tot_error=$(($tot_error + $error))
         if [ "$nb_ope" -lt "$min" ]
         then
@@ -235,12 +225,13 @@ then
 	display_help
 fi
 
-if [ $valgrind -eq "$1" ]
-	then
-		VALGRIND="valgrind"
-	else
-		VALGRIND=""
-	fi
+valgrind_exists=$(whereis valgrind | cut -d':' -f2 | wc -c)
+if [[ "$valgrind" -eq "1" && "$valgrind_exists" -ne "1" ]]
+then
+	VALGRIND="valgrind"
+else
+	VALGRIND=""
+fi
 
 ## title
 
@@ -252,7 +243,7 @@ function print_title()
 		return
 	fi
 	title_printed=1
-	printf "\n\n[MAIN TEST]\n"
+	printf "\n\n[STATISTICS]\n"
 	if [ "$valgrind" -eq "1" ]
 	then
 		tests=10
@@ -272,12 +263,9 @@ re='^[0-9]+$'
 standard_test_errors
 for arg in $@
 do
-	if [ $arg != "-v" ]
+	if [[ $arg =~ $re ]]
 	then
-		if [[ $arg =~ $re ]]
-		then
-			print_title
-    		test $arg $valgrind
-		fi
+		print_title
+   		test $arg $valgrind
 	fi
 done
