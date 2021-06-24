@@ -14,13 +14,21 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 ## help
-if [ "$#" -eq "0" ]
-then
-	printf "usage: ./tester.sh [-v] n0 n1 n2\n"
-	printf "\tn0,n1,n2\tseveral sizes of input\n"
-	printf "\t-v      \trun with valgrind to check leaks and errors\n\n"
+
+function display_help()
+{
+	printf "usage: ./tester.sh [optiosn] n0 n1 n2\n"
+	printf "\twhere n0,n1,n2 are several sizes of input\n\n"
+	printf "options:\n"
+	printf "\t-v --valgrind\trun with valgrind to check leaks and errors\n"
+	printf "\t-h --help\tdisplay help\n\n"
 	printf "example: ./tester.sh 3 5 100 500\n"
 	exit
+}
+
+if [ "$#" -eq "0" ]
+then
+	display_help
 fi
 
 ## check if checker and push_swap files are here
@@ -120,16 +128,26 @@ function test()
 	fi
 }
 
-## valgrind option
+## options
 
 valgrind=0
+help=0
 for arg in $@
 do
-	if [ $arg = "-v" ]
+	if [[ $arg = "-v" ||  $arg = "--valgrind" ]]
 	then
     	valgrind=1
 	fi
+	if [[ $arg = "-h" ||  $arg = "--help" ]]
+	then
+		help=1
+	fi
 done
+
+if [ "$help" -eq "1" ]
+then
+	display_help
+fi
 
 ## title
 
