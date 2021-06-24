@@ -102,7 +102,6 @@ function standard_test_errors()
 	then
 		exit
 	fi
-	printf "\n\n"
 }
 
 ## generate random numbers
@@ -210,14 +209,20 @@ fi
 
 ## title
 
+title_printed=0
 function print_title()
 {
-	printf "[MAIN TEST]\n"
+	if [ "$title_printed" -ne "0" ]
+	then
+		return
+	fi
+	title_printed=1
+	printf "\n\n[MAIN TEST]\n"
 	if [ "$valgrind" -eq "1" ]
 	then
 		tests=10
 		printf "$tests tests per argument, also checking leaks\n\n"
-		printf "\tnbs\tavg.\tmax\tmin\tleaks\terrors\n"
+		printf "\tnbs\tavg.\tmax\tmin\tleaks\terr\n"
 	else
 		tests=100
 		printf "$tests tests per argument, not checking leaks\n\n"
@@ -230,13 +235,13 @@ function print_title()
 re='^[0-9]+$'
 
 standard_test_errors
-print_title
 for arg in $@
 do
 	if [ $arg != "-v" ]
 	then
 		if [[ $arg =~ $re ]]
 		then
+			print_title
     		test $arg $valgrind
 		fi
 	fi
