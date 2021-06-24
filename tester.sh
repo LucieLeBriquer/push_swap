@@ -17,7 +17,7 @@ NC='\033[0m'
 
 function display_help()
 {
-	printf "usage: ./tester.sh [optiosn] n0 n1 n2\n"
+	printf "usage: ./tester.sh [options] n0 n1 n2 ...\n"
 	printf "\twhere n0,n1,n2 are several sizes of input\n\n"
 	printf "options:\n"
 	printf "\t-v --valgrind\trun with valgrind to check leaks and errors\n"
