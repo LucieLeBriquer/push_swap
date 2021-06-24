@@ -97,6 +97,15 @@ function standard_test_errors()
 	else
 		printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
 	fi
+
+	cmd="$CHECKER_PATH 0 2 3 abcde"
+	test_error "$cmd" 1
+	cmd="$CHECKER_PATH -2147483649"
+	test_error "$cmd" 1
+	cmd="$CHECKER_PATH 2147483648"
+	test_error "$cmd" 1
+	cmd="$CHECKER_PATH 0 1 2 3 0"
+	test_error "$cmd" 1
 	
 	if [ "$fail" -ne "0" ]
 	then
