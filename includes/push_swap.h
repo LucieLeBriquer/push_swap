@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:20:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/25 00:36:02 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/25 00:40:24 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		execute_instructions(t_stack *stack);
 int		is_instruction(char *str);
 void	print_stack(t_stack stack);
 void	check_sorted(t_stack stack);
-int		duplicate(t_stack stack);
 int		print_error(char *str);
 void	print_stack(t_stack stack);
 int		init_stack(int argc, char **argv, int tot_size, t_stack *stack);

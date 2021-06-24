@@ -52,22 +52,27 @@ fail=0
 
 function test_error()
 {
-	
-	test=$($1 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	test=$($VALGRIND $1 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	leak=$(cat .log | grep "LEAK" | wc -l)
 	rm .log .res
 	if [ "$test" -ne "$2" ]
 	then
 		printf "${RED}[KO]${NC} $cmd\n"
 		fail=1
 	else
-		printf "${GREEN}[OK]${NC} $cmd\n"
+		if [ "$leak" -ne "0" ]
+		then
+			printf "${YELLOW}[KO]${NC} $cmd\n"
+		else
+			printf "${GREEN}[OK]${NC} $cmd\n"
+		fi
 	fi
 }
 
 function standard_test_errors()
 {
 	printf "[TESTING ERRORS]\n"
-	cmd="$PUSHSWAP_PATH 0 2 3 abcde"
+	cmd="$PUSHSWAP_PATH 0 2 one 3"
 	test_error "$cmd" 1
 	cmd="$PUSHSWAP_PATH -2147483648"
 	test_error "$cmd" 0
@@ -80,25 +85,39 @@ function standard_test_errors()
 	cmd="$PUSHSWAP_PATH 0 1 2 3 0"
 	test_error "$cmd" 1
 
-	test=$($PUSHSWAP_PATH "0 1" "3 2 -1" 2> .log 1> .res ; cat .log | grep "Error" | wc -l; rm .log .res)
+	test=$($VALGRIND $PUSHSWAP_PATH "0 1" "3 2 -1" 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	leak=$(cat .log | grep "LEAK" | wc -l)
+	rm .log .res
 	if [ "$test" -ne "0" ]
 	then
 		printf "${RED}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
 		fail=1
 	else
-		printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
+		if [ "$leak" -ne "0" ]
+		then
+			printf "${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
+		else
+			printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
+		fi
 	fi
 
-	test=$($PUSHSWAP_PATH "0 1" "3 2 0" 2> .log 1> .res ; cat .log | grep "Error" | wc -l; rm .log .res)
+	test=$($VALGRIND $PUSHSWAP_PATH "0 1" "3 2 0" 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	leak=$(cat .log | grep "LEAK" | wc -l)
+	rm .log .res
 	if [ "$test" -ne "1" ]
 	then
 		printf "${RED}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
 		fail=1
 	else
-		printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
+		if [ "$leak" -ne "0" ]
+		then
+			printf "${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
+		else
+			printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
+		fi
 	fi
 
-	cmd="$CHECKER_PATH 0 2 3 abcde"
+	cmd="$CHECKER_PATH 0 2 one 3"
 	test_error "$cmd" 1
 	cmd="$CHECKER_PATH -2147483649"
 	test_error "$cmd" 1
@@ -215,6 +234,13 @@ if [ "$help" -eq "1" ]
 then
 	display_help
 fi
+
+if [ $valgrind -eq "$1" ]
+	then
+		VALGRIND="valgrind"
+	else
+		VALGRIND=""
+	fi
 
 ## title
 

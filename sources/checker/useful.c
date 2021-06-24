@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:12:19 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/05/04 23:18:24 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/25 00:40:04 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,4 @@ void	check_sorted(t_stack stack)
 		i++;
 	}
 	ft_putstr("OK!\n");
-}
-
-int	duplicate(t_stack stack)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < stack.n_a)
-	{
-		j = 0;
-		while (j < i)
-		{
-			if (stack.a[i] == stack.a[j])
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
 }
