@@ -3,6 +3,7 @@
 *.swp
 checker
 checker_linux
+.valgrind_log
 !sources/checker/
 push_swap
 !sources/push_swap/

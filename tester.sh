@@ -59,10 +59,10 @@ function test()
         sum=$(($sum + $nb_ope))
 		if [ "$valgrind" -eq "1" ]
 		then
-			error=$(valgrind $PUSHSWAP_PATH $entries 2> .valgrind_log | $CHECKER_PATH $entries | grep -E "(KO|Error)" | wc -l)
+			error=$(valgrind $PUSHSWAP_PATH $entries 2> .valgrind_log | valgrind $CHECKER_PATH $entries 2>> .valgrind_log | grep -E "(KO|Error)" | wc -l)
 			leak=$(cat .valgrind_log | grep "LEAK" | wc -l)
 			leaks=$(($leaks + $leak))
-			rm .valgrind_log
+			#rm .valgrind_log
 		else
 			error=$($PUSHSWAP_PATH $entries | $CHECKER_PATH $entries | grep -E "(KO|Error)" | wc -l)
 		fi
