@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:15:27 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/13 22:32:41 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/24 22:35:46 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	check_args(int argc, char **argv, int *tot_size)
 	char	**split;
 
 	i = 1;
+	*tot_size = 0;
 	while (i < argc)
 	{
 		split = ft_splitchar(argv[i], ' ');
