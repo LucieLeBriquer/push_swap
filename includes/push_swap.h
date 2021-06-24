@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:20:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/24 12:57:45 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/25 00:36:02 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_stack
 	int		n_a;
 	int		*chunk;
 	int		nb_chunk;
-	t_list	*moves; // TO FIX
+	t_list	*moves;
 }		t_stack;
 
 typedef void	(*t_ope)(t_stack *stack);

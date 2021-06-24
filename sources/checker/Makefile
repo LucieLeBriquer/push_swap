@@ -5,7 +5,7 @@ NAME_SHORT	= checker
 
 INCS_DIR	= ../../includes/
 MAIN_INC	= -I$(INCS_DIR)
-INCS		= $(find $(INCS_DIR) -type f -name "*.h")
+INCS		= $(shell find $(INCS_DIR) -type f -name "*.h")
 
 LIB_DIR		= ../../libft/
 LIB_INC		= -I$(LIB_DIR)includes/
