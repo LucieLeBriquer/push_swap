@@ -17,12 +17,12 @@ NC='\033[0m'
 
 function display_help()
 {
-	printf "usage: ./tester.sh [options] n0 n1 n2 ...\n"
+	printf "usage:\t./tester.sh [options] n0 n1 n2 ...\n"
 	printf "\twhere n0,n1,n2 are several sizes of input\n\n"
 	printf "options:\n"
 	printf "\t-v --valgrind\trun with valgrind to check leaks and errors\n"
 	printf "\t-h --help\tdisplay this help\n\n"
-	printf "example: ./tester.sh 3 5 100 500\n"
+	printf "example:\n\t./tester.sh 3 5 100 500\n"
 	exit
 }
 
