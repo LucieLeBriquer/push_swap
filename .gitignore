@@ -1,6 +1,7 @@
 *.o
 *.pdf
 *.swp
+*.a
 checker
 checker_linux
 .valgrind_log
