@@ -4,6 +4,7 @@
 This project consists in sorting data using two stacks and a limited set of instructions. The aim is to generate the smallest sequence of instructions that will sort the input data.
 
 ## Notation scale
+<center>
 
 | Input size | Max | 5pts | 4pts | 3pts | 2pts | 1pts |
 | :----: |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
@@ -11,6 +12,8 @@ This project consists in sorting data using two stacks and a limited set of inst
 | 5   	 | 12    |   -   |   -   |   -   |   -   |   -   |
 | 100    | 1500  |  700  |  900  | 1100  | 1300  | 1500  |
 | 500    | 11500 |  5500 |  7000 |  8500 | 10000 | 11500 |
+
+</center>
 
 ## Makefile
 - Run `make` to compile the `push_swap` program.
