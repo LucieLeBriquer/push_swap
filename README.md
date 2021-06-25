@@ -31,7 +31,7 @@ options:
         -h --help       display this help
 
 example:
-		./tester.sh 3 5 100 500
+        ./tester.sh 3 5 100 500
 ```
 
 ## My results
