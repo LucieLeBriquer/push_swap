@@ -36,9 +36,9 @@ example: ./tester.sh 3 5 100 500
 [STATISTICS]
 100 tests per argument, not checking leaks
 
-	    size	avg.	max 	min
-[OK]	3		1		2		0
-[OK]	5		8		11		4
-[OK]	100		687		746		643
-[OK]	500		6065	6365	5738
+        size    avg.    max     min
+[OK]    3       1       2       0
+[OK]    5       8       11      4
+[OK]    100     687     746     643
+[OK]    500     6065    6365    5738
 ```
