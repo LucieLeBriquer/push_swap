@@ -248,11 +248,11 @@ function print_title()
 	then
 		tests=10
 		printf "$tests tests per argument, also checking leaks\n\n"
-		printf "\tnbs\tavg.\tmax\tmin\tleaks\terr\n"
+		printf "\tsize\tavg.\tmax\tmin\tleaks\terr\n"
 	else
 		tests=100
 		printf "$tests tests per argument, not checking leaks\n\n"
-		printf "\tnbs\tavg.\tmax\tmin\n"
+		printf "\tsize\tavg.\tmax\tmin\n"
 	fi
 }
 
