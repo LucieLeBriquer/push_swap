@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:12:19 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/06/25 00:40:04 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/06/25 16:19:26 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	check_sorted(t_stack stack)
 
 	if (stack.n_b != 0)
 	{
-		ft_putstr("KO!\n");
+		ft_putstr("KO\n");
 		return ;
 	}
 	i = 0;
@@ -53,10 +53,10 @@ void	check_sorted(t_stack stack)
 	{
 		if (stack.a[i] > stack.a[i + 1])
 		{
-			ft_putstr("KO!\n");
+			ft_putstr("KO\n");
 			return ;
 		}
 		i++;
 	}
-	ft_putstr("OK!\n");
+	ft_putstr("OK\n");
 }

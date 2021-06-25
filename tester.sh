@@ -52,19 +52,19 @@ fail=0
 
 function test_error()
 {
-	test=$($VALGRIND $1 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	test=$($VALGRIND$1 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
 	leak=$(cat .log | grep "LEAK" | wc -l)
 	rm .log .res
 	if [ "$test" -ne "$2" ]
 	then
-		printf "${RED}[KO]${NC} $cmd\n"
+		printf "  ${RED}[KO]${NC} $cmd\n"
 		fail=1
 	else
 		if [ "$leak" -ne "0" ]
 		then
-			printf "${YELLOW}[KO]${NC} $cmd\n"
+			printf "  ${YELLOW}[KO]${NC} $cmd\n"
 		else
-			printf "${GREEN}[OK]${NC} $cmd\n"
+			printf "  ${GREEN}[OK]${NC} $cmd\n"
 		fi
 	fi
 }
@@ -72,6 +72,8 @@ function test_error()
 function standard_test_errors()
 {
 	printf "[TESTING ERRORS]\n"
+	printf "$PUSHSWAP_PATH\n"
+
 	cmd="$PUSHSWAP_PATH 0 2 one 3"
 	test_error "$cmd" 1
 	cmd="$PUSHSWAP_PATH -2147483648"
@@ -85,33 +87,35 @@ function standard_test_errors()
 	cmd="$PUSHSWAP_PATH 0 1 2 3 0"
 	test_error "$cmd" 1
 
-	test=$($VALGRIND $PUSHSWAP_PATH "0 1" "3 2 -1" 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	test=$($VALGRIND$PUSHSWAP_PATH "0 1" "3 2 -1" 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
 	leak=$(cat .log | grep "LEAK" | wc -l)
 	rm .log .res
 	if [ "$test" -ne "0" ]
 	then
-		printf "${RED}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
+		printf "  ${RED}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
 		fail=1
 	elif [ "$leak" -ne "0" ]
 	then
-		printf "${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
+		printf "  ${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
 	else
-		printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
+		printf "  ${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 -1\"\n"
 	fi
 
-	test=$($VALGRIND $PUSHSWAP_PATH "0 1" "3 2 0" 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	test=$($VALGRIND$PUSHSWAP_PATH "0 1" "3 2 0" 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
 	leak=$(cat .log | grep "LEAK" | wc -l)
 	rm .log .res
 	if [ "$test" -ne "1" ]
 	then
-		printf "${RED}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
+		printf "  ${RED}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
 		fail=1
 	elif [ "$leak" -ne "0" ]
 	then
-		printf "${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
+		printf "  ${YELLOW}[KO]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
 	else
-		printf "${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
+		printf "  ${GREEN}[OK]${NC} $PUSHSWAP_PATH \"0 1\" \"3 2 0\"\n"
 	fi
+
+	printf "$CHECKER_PATH\n"
 
 	cmd="$CHECKER_PATH 0 2 one 3"
 	test_error "$cmd" 1
@@ -121,6 +125,34 @@ function standard_test_errors()
 	test_error "$cmd" 1
 	cmd="$CHECKER_PATH 0 1 2 3 0"
 	test_error "$cmd" 1
+
+	test=$(echo notacommand | $VALGRIND$CHECKER_PATH 0 1 3 2 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	leak=$(cat .log | grep "LEAK" | wc -l)
+	rm .log .res
+	if [ "$test" -ne "1" ]
+	then
+		printf "  ${RED}[KO]${NC} echo notacommand | $CHECKER_PATH 0 1 3 2\n"
+		fail=1
+	elif [ "$leak" -ne "0" ]
+	then
+		printf "  ${YELLOW}[KO]${NC} echo notacommand | $CHECKER_PATH 0 1 3 2\n"
+	else
+		printf "  ${GREEN}[OK]${NC} echo notacommand | $CHECKER_PATH 0 1 3 2\n"
+	fi
+
+	test=$($VALGRIND$CHECKER_PATH "0 1" "3 2 0" 2> .log 1> .res ; cat .log | grep "Error" | wc -l)
+	leak=$(cat .log | grep "LEAK" | wc -l)
+	rm .log .res
+	if [ "$test" -ne "1" ]
+	then
+		printf "  ${RED}[KO]${NC} $CHECKER_PATH \"0 1\" \"3 2 0\"\n"
+		fail=1
+	elif [ "$leak" -ne "0" ]
+	then
+		printf "  ${YELLOW}[KO]${NC} $CHECKER_PATH \"0 1\" \"3 2 0\"\n"
+	else
+		printf "  ${GREEN}[OK]${NC} $CHECKER_PATH \"0 1\" \"3 2 0\"\n"
+	fi
 	
 	if [ "$fail" -ne "0" ]
 	then
@@ -157,7 +189,7 @@ function test()
 		random_entry $1
         nb_ope=$($PUSHSWAP_PATH $entries | wc -l)
         sum=$(($sum + $nb_ope))
-		error=$($VALGRIND $PUSHSWAP_PATH $entries 2> .log | $VALGRIND $CHECKER_PATH $entries 2>> .log 1>>.log ; cat .log | grep -E "(KO|Error)" | wc -l)
+		error=$($VALGRIND$PUSHSWAP_PATH $entries 2> .log | $VALGRIND$CHECKER_PATH $entries 2>> .log 1>>.log ; cat .log | grep -E "(KO|Error)" | wc -l)
 		leak=$(cat .log | grep "LEAK" | wc -l)
 		error_valgrind=$(cat .log | grep "ERROR SUMMARY" | cut -d':' -f2 | cut -d'e' -f1 | cut -d' ' -f2)
 		leaks=$(($leaks + $leak))
@@ -228,7 +260,7 @@ fi
 valgrind_exists=$(whereis valgrind | cut -d':' -f2 | wc -c)
 if [[ "$valgrind" -eq "1" && "$valgrind_exists" -ne "1" ]]
 then
-	VALGRIND="valgrind"
+	VALGRIND="valgrind "
 else
 	VALGRIND=""
 fi
